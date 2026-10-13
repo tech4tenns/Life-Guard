@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Meu Dia Saudável</title>
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Meu Dia">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,650;12..96,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Desktop sidebar -->
+  <aside class="sidebar" aria-label="Navegação principal">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#DCEBE1"/>
+        <path d="M20 28c0-8 -6-11 -6-17 0 5 3 6 6 8 3-2 6-3 6-8 0 6-6 9-6 17z" fill="#3F7D58"/>
+      </svg>
+      <div class="brand-text">Meu Dia<br>Saudável</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-page="home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+        Início
+      </button>
+      <button class="nav-item" data-page="habitos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3c-4 3-6 6-6 10a6 6 0 0 0 12 0c0-4-2-7-6-10z"/></svg>
+        Hábitos
+      </button>
+      <button class="nav-item" data-page="progresso">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+        Meu progresso
+      </button>
+      <button class="nav-item" data-page="bemestar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M9 12a3 3 0 0 0 6 0"/></svg>
+        Bem-estar
+      </button>
+      <button class="nav-item" data-page="conquistas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M5 6H3v2a4 4 0 0 0 4 4M19 6h2v2a4 4 0 0 1-4 4"/><path d="M12 13v3M9 20h6M10 16.5h4v2h-4z"/></svg>
+        Conquistas
+      </button>
+
+      <button class="nav-item sidebar-profile-btn" data-page="perfil" id="sidebarProfileBtn">
+        <span class="mini-avatar" id="miniAvatarSidebar">Eu</span>
+        <span id="sidebarProfileName">Meu perfil</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-foot">
+      Seus dados ficam salvos só neste navegador.
+      <br><button class="reset-link" id="resetBtn">Recomeçar do zero</button>
+    </div>
+  </aside>
+
+  <!-- Mobile topbar -->
+  <header class="mobile-topbar">
+    <svg class="brand-mark" width="28" height="28" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <circle cx="20" cy="20" r="19" fill="#DCEBE1"/>
+      <path d="M20 28c0-8 -6-11 -6-17 0 5 3 6 6 8 3-2 6-3 6-8 0 6-6 9-6 17z" fill="#3F7D58"/>
+    </svg>
+    <div class="brand-text" style="font-size:0.95rem;">Meu Dia Saudável</div>
+    <button class="mini-avatar mobile-avatar-btn" id="miniAvatarMobile" data-page="perfil" aria-label="Meu perfil">Eu</button>
+  </header>
+
+  <!-- Main content area -->
+  <main>
+    <div class="page-inner">
+
+      <!-- ================= HOME ================= -->
+      <section class="page active" id="page-home">
+        <div class="eyebrow-date" id="todayLabel"></div>
+        <h1 id="greeting">Olá!</h1>
+
+        <div class="home-hero">
+          <div class="character-wrap" id="characterWrap"></div>
+          <div class="hero-text">
+            <h2 id="stageTitle">Seu broto de hoje</h2>
+            <p id="stageDesc">Cada hábito que você cuida ajuda esse personagem a crescer, dia após dia.</p>
+            <div class="streak"><b id="streakCount">0</b> dias seguidos</div>
+          </div>
+        </div>
+
+        <div class="section-title">
+          <span>Missões de hoje</span>
+          <span class="mission-progress" id="missionProgressText">0/4</span>
+        </div>
+        <ul class="mission-list" id="missionList"></ul>
+
+        <div class="section-title">Resumo rápido</div>
+        <div class="stat-row" id="quickStats"></div>
+      </section>
+
+      <!-- ================= HÁBITOS ================= -->
+      <section class="page" id="page-habitos">
+        <div class="eyebrow-date">Hábitos de hoje</div>
+        <h1>Cuide de cada parte do seu dia</h1>
+
+        <div class="habit-grid">
+
+          <div class="card habit-card">
+            <div class="habit-head">
+              <div class="habit-icon" style="background:var(--blue-pale);">💧</div>
+              <div><h3>Água</h3><div class="habit-desc">Meta de hoje: 6 copos</div></div>
+            </div>
+            <div class="counter-row">
+              <button class="counter-btn" id="waterMinus" aria-label="Diminuir água">−</button>
+              <div class="counter-value"><span id="waterValue">0</span> copos</div>
+              <button class="counter-btn" id="waterPlus" aria-label="Aumentar água">+</button>
+            </div>
+            <div class="cups" id="cupsRow"></div>
+          </div>
+
+          <div class="card habit-card">
+            <div class="habit-head">
+              <div class="habit-icon" style="background:var(--green-pale);">😴</div>
+              <div><h3>Sono</h3><div class="habit-desc">Registre quando dormiu e acordou</div></div>
+            </div>
+            <div class="time-row">
+              <div class="time-field"><label for="sleepStart">Dormi às</label><input type="time" id="sleepStart"></div>
+              <div class="time-field"><label for="sleepEnd">Acordei às</label><input type="time" id="sleepEnd"></div>
+            </div>
+            <div class="sleep-summary" id="sleepSummary"></div>
+          </div>
+
+          <div class="card habit-card">
+            <div class="habit-head">
+              <div class="habit-icon" style="background:var(--amber-pale);">🏃</div>
+              <div><h3>Movimento</h3><div class="habit-desc">Uma caminhada já conta</div></div>
+            </div>
+            <button class="toggle-btn" id="moveToggle">Ainda não me movimentei hoje</button>
+          </div>
+
+          <div class="card habit-card">
+            <div class="habit-head">
+              <div class="habit-icon" style="background:var(--coral-pale);">🥗</div>
+              <div><h3>Alimentação</h3><div class="habit-desc">Lembretes de refeição, sem contar calorias</div></div>
+            </div>
+            <div class="checklist" id="mealChecklist"></div>
+            <div class="food-tip">🌈 <span id="foodTip">Experimente incluir uma cor diferente no prato hoje.</span></div>
+          </div>
+
+          <div class="card habit-card">
+            <div class="habit-head">
+              <div class="habit-icon" style="background:var(--blue-pale);">⏰</div>
+              <div><h3>Pausas</h3><div class="habit-desc">Pequenas pausas longe da tela</div></div>
+            </div>
+            <div class="counter-row">
+              <button class="counter-btn" id="pauseMinus" aria-label="Diminuir pausas">−</button>
+              <div class="counter-value"><span id="pauseValue">0</span> pausas</div>
+              <button class="counter-btn" id="pausePlus" aria-label="Aumentar pausas">+</button>
+            </div>
+          </div>
+
+          <div class="card habit-card">
+            <div class="habit-head">
+              <div class="habit-icon" style="background:var(--amber-pale);">🐾</div>
+              <div><h3>Pet</h3><div class="habit-desc">Quem cuida de você também merece cuidado</div></div>
+            </div>
+            <div class="checklist" id="petChecklist"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= PROGRESSO ================= -->
+      <section class="page" id="page-progresso">
+        <div class="eyebrow-date">Sua jornada</div>
+        <h1>Meu progresso</h1>
+
+        <div class="dash-top">
+          <div class="card ring-card">
+            <div class="ring-wrap">
+              <svg class="ring-svg" viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
+                <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="50"></circle>
+              </svg>
+              <div class="ring-center">
+                <div class="ring-pct" id="ringPct">0%</div>
+                <div class="ring-lbl">hoje</div>
+              </div>
+            </div>
+            <div class="ring-caption" id="ringCaption">0 de 4 missões</div>
+          </div>
+
+          <div class="big-stats">
+            <div class="big-stat"><div class="num" id="progStreak">0</div><div class="lbl">dias seguidos</div></div>
+            <div class="big-stat"><div class="num" id="progPoints">0</div><div class="lbl">⭐ pontos acumulados</div></div>
+            <div class="big-stat"><div class="num" id="progBest">0</div><div class="lbl">melhor sequência</div></div>
+          </div>
+        </div>
+
+        <div class="section-title">Últimos 7 dias</div>
+        <div class="card chart-card">
+          <div class="habit-desc" style="font-size:0.78rem; color:var(--ink-soft); margin-bottom:4px;">Percentual de missões concluídas por dia</div>
+          <div class="bars" id="weekBars"></div>
+        </div>
+
+        <div class="section-title">Média da semana</div>
+        <div class="habit-summary-grid" id="habitSummaryGrid"></div>
+
+        <div class="section-title">Últimos 35 dias</div>
+        <div class="card heatmap-card">
+          <div class="heatmap" id="heatmapGrid"></div>
+          <div class="heatmap-legend">
+            <span>Menos</span>
+            <span class="hm-swatch l0"></span><span class="hm-swatch l1"></span><span class="hm-swatch l2"></span><span class="hm-swatch l3"></span><span class="hm-swatch l4"></span>
+            <span>Mais</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BEM-ESTAR ================= -->
+      <section class="page" id="page-bemestar">
+        <div class="eyebrow-date">Um momento para você</div>
+        <h1>Bem-estar</h1>
+
+        <div class="card" style="margin-top:18px;">
+          <h3 style="font-size:0.95rem;">Como você está se sentindo?</h3>
+          <div class="mood-row" id="moodRow"></div>
+        </div>
+
+        <div class="card" style="margin-top:16px;">
+          <h3 style="font-size:0.95rem;">Exercício de respiração</h3>
+          <div class="breathing-wrap">
+            <div class="breath-circle" id="breathCircle">Pronto</div>
+            <button class="breath-btn" id="breathBtn">Começar respiração guiada</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px;">
+          <h3 style="font-size:0.95rem;">Sugestões de pausa</h3>
+          <div class="tips-list" id="tipsList"></div>
+        </div>
+      </section>
+
+      <!-- ================= CONQUISTAS ================= -->
+      <section class="page" id="page-conquistas">
+        <div class="eyebrow-date">Suas medalhas</div>
+        <h1>Conquistas</h1>
+        <div class="badge-grid" id="badgeGrid"></div>
+      </section>
+
+      <!-- ================= PERFIL ================= -->
+      <section class="page" id="page-perfil">
+        <div class="eyebrow-date">Sobre você</div>
+        <h1>Meu perfil</h1>
+
+        <div class="card" style="margin-top:18px;">
+          <div class="profile-photo-row">
+            <div class="profile-photo-wrap">
+              <div class="profile-photo" id="profilePhotoPreview">Eu</div>
+              <button class="photo-edit-btn" id="photoEditBtn" type="button" aria-label="Alterar foto">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h3l2-3h6l2 3h3v13H4z"/><circle cx="12" cy="13.5" r="3.5"/></svg>
+              </button>
+              <input type="file" id="photoInput" accept="image/*" hidden>
+            </div>
+            <div class="profile-photo-hint">
+              <div style="font-weight:600; font-size:0.92rem;">Foto do perfil</div>
+              <div style="font-size:0.8rem; color:var(--ink-soft); margin-top:2px;">Clique no ícone da câmera para escolher uma imagem.</div>
+              <button class="reset-link" id="removePhotoBtn" style="margin-top:8px;">Remover foto</button>
+            </div>
+          </div>
+
+          <div class="profile-field">
+            <label for="profileName">Nome</label>
+            <input type="text" id="profileName" placeholder="Como podemos te chamar?" maxlength="40">
+          </div>
+
+          <div class="profile-field">
+            <label for="profileBirthdate">Data de nascimento</label>
+            <input type="date" id="profileBirthdate">
+            <div class="profile-age" id="profileAge"></div>
+          </div>
+
+          <button class="save-profile-btn" id="saveProfileBtn">Salvar perfil</button>
+          <div class="save-confirm" id="saveConfirm" aria-live="polite">Perfil salvo ✓</div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Mobile bottom tabbar -->
+  <nav class="bottom-tabbar" aria-label="Navegação inferior">
+    <button class="nav-item active" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+      Início
+    </button>
+    <button class="nav-item" data-page="habitos">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3c-4 3-6 6-6 10a6 6 0 0 0 12 0c0-4-2-7-6-10z"/></svg>
+      Hábitos
+    </button>
+    <button class="nav-item" data-page="progresso">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+      Progresso
+    </button>
+    <button class="nav-item" data-page="bemestar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M9 12a3 3 0 0 0 6 0"/></svg>
+      Bem-estar
+    </button>
+    <button class="nav-item" data-page="conquistas">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M5 6H3v2a4 4 0 0 0 4 4M19 6h2v2a4 4 0 0 1-4 4"/><path d="M12 13v3M9 20h6M10 16.5h4v2h-4z"/></svg>
+      Conquistas
+    </button>
+  </nav>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
