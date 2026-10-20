@@ -1821,3 +1821,28 @@
 
   paintAcc(); renderProfs(); renderDir(); lock();
 })();
+
+/* Meu Dia Saudável — indicador deslizante da navegação (barra lateral e barra inferior) */
+(function () {
+  "use strict";
+  var navs = document.querySelectorAll(".bottom-tabbar, .sidebar-nav");
+  Array.prototype.forEach.call(document.querySelectorAll(".sidebar-nav .nav-item:not(.sidebar-profile-btn)"), function (b) { b.title = b.textContent.trim(); }); // dica no trilho de ícones
+  function place(n) {
+    var a = n.querySelector(".nav-item.active");
+    if (!a || !a.offsetWidth) return; // barra escondida neste tamanho de tela
+    n.style.setProperty("--x", a.offsetLeft + a.offsetWidth / 2 + "px");
+    n.style.setProperty("--y", a.offsetTop + "px");
+    n.style.setProperty("--h", a.offsetHeight + "px");
+    if (!n.hasAttribute("data-ready")) {
+      n.setAttribute("data-ready", "");
+      requestAnimationFrame(function () { requestAnimationFrame(function () { n.setAttribute("data-anim", ""); }); });
+    }
+  }
+  function all() { Array.prototype.forEach.call(navs, place); }
+  Array.prototype.forEach.call(navs, function (n) {
+    new MutationObserver(function () { place(n); }).observe(n, { attributes: true, attributeFilter: ["class"], subtree: true });
+  });
+  window.addEventListener("resize", all);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(all);
+  all();
+})();
